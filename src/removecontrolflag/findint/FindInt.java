@@ -1,4 +1,4 @@
-package removecontrolflag;
+package removecontrolflag.findint;
 
 public class FindInt {
     public static boolean find(int[] data, int target) {
