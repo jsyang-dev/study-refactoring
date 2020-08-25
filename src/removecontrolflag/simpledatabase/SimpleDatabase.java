@@ -6,9 +6,12 @@ import java.io.Reader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SimpleDatabase {
-    private Map<String,String> map = new HashMap<>();
+    private final Map<String,String> map = new HashMap<>();
+    private static Pattern pattern = Pattern.compile("([^=]+)=(.*)");
     public SimpleDatabase(Reader r) throws IOException {
         BufferedReader reader = new BufferedReader(r);
         while (true) {
@@ -16,10 +19,10 @@ public class SimpleDatabase {
             if (line == null) {
                 break;
             }
-            int equalIndex = line.indexOf("=");
-            if (equalIndex > 0) {
-                String key = line.substring(0, equalIndex);
-                String value = line.substring(equalIndex + 1);
+            Matcher matcher = pattern.matcher(line);
+            if (matcher.matches()) {
+                String key = matcher.group(1);
+                String value = matcher.group(2);
                 map.put(key, value);
             }
         }
