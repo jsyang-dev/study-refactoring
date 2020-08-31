@@ -1,32 +1,52 @@
 package extractclass;
 
 public class Book {
-    private String _title;
-    private String _isbn;
-    private String _price;
-    private String _authorName;
-    private String _authorMail;
+    private String title;
+    private String isbn;
+    private String price;
+    private Author author;
+
     public Book(String title, String isbn, String price, String authorName, String authorMail) {
-        _title = title;
-        _isbn = isbn;
-        _price = price;
-        _authorName = authorName;
-        _authorMail = authorMail;
+        this.title = title;
+        this.isbn = isbn;
+        this.price = price;
+        author = new Author(authorName, authorMail);
     }
-    public String getTitle() { return _title; }
-    public String getIsbn() { return _isbn; }
-    public String getPrice() { return _price; }
-    public String getAuthorName() { return _authorName; }
-    public String getAuthorMail() { return _authorMail; }
-    public void setAuthorName(String name) { _authorName = name; }
-    public void setAuthorMail(String mail) { _authorMail = mail; }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getAuthorName() {
+        return author.getName();
+    }
+
+    public String getAuthorMail() {
+        return author.getMail();
+    }
+
+    public void setAuthorName(String name) {
+        author.setName(name);
+    }
+
+    public void setAuthorMail(String mail) {
+        author.setMail(mail);
+    }
+
     public String toXml() {
-        String author =
-            tag("author", tag("name", _authorName) + tag("mail", _authorMail));
-        String book =
-            tag("book", tag("title", _title) + tag("isbn", _isbn) + tag("price", _price) + author);
-        return book;
+        String authorXml =
+                tag("author", tag("name", author.getName()) + tag("mail", author.getMail()));
+        return tag("book", tag("title", title) + tag("isbn", isbn) + tag("price", price) + authorXml);
     }
+
     private String tag(String element, String content) {
         return "<" + element + ">" + content + "</" + element + ">";
     }
