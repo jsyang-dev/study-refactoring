@@ -1,10 +1,6 @@
 package replace_type_code_with_class;
 
 public class Item {
-    public static final int TYPECODE_BOOK = ItemType.BOOK.getTypecode();
-    public static final int TYPECODE_DVD = ItemType.DVD.getTypecode();
-    public static final int TYPECODE_SOFTWARE = ItemType.SOFTWARE.getTypecode();
-
     private final ItemType itemType;
     private final String title;
     private final int price;
