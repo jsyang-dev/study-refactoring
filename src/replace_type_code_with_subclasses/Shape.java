@@ -1,72 +1,45 @@
 package replace_type_code_with_subclasses;
 
-public class Shape {
+public abstract class Shape {
     public static final int TYPECODE_LINE = 0;
     public static final int TYPECODE_RECTANGLE = 1;
     public static final int TYPECODE_OVAL = 2;
 
-    private final int _typecode;
     private final int _startx;
     private final int _starty;
     private final int _endx;
     private final int _endy;
 
-    protected Shape(int typecode, int startx, int starty, int endx, int endy) {
-        _typecode = typecode;
+    public static Shape createShape(int typecode, int startx, int starty, int endx, int endy) {
+        switch (typecode) {
+            case TYPECODE_LINE:
+                return new ShapeLine(startx, starty, endx, endy);
+            case TYPECODE_RECTANGLE:
+                return new ShapeRectangle(startx, starty, endx, endy);
+            case TYPECODE_OVAL:
+                return new ShapeOval(startx, starty, endx, endy);
+            default:
+                throw new IllegalArgumentException("typecode = " + typecode);
+        }
+    }
+
+    protected Shape(int startx, int starty, int endx, int endy) {
         _startx = startx;
         _endx = endx;
         _starty = starty;
         _endy = endy;
     }
 
-    public int getTypecode() { return _typecode; }
+    public abstract int getTypecode();
 
-    public String getName() {
-        switch (_typecode) {
-        case TYPECODE_LINE:
-            return "LINE";
-        case TYPECODE_RECTANGLE:
-            return "RECTANGLE";
-        case TYPECODE_OVAL:
-            return "OVAL";
-        default:
-            return null;
-        }
-    }
+    public abstract String getName();
 
     public String toString() {
         return "[ "
-            + getName() + ", "
-            + "(" + _startx + ", " + _starty + ")-"
-            + "(" + _endx + ", " + _endy + ") ]";
+                + getName() + ", "
+                + "(" + _startx + ", " + _starty + ")-"
+                + "(" + _endx + ", " + _endy + ") ]";
     }
 
-    public void draw() {
-        switch (_typecode) {
-        case TYPECODE_LINE:
-            drawLine();
-            break;
-        case TYPECODE_RECTANGLE:
-            drawRectangle();
-            break;
-        case TYPECODE_OVAL:
-            drawOval();
-            break;
-        default:
-            ;
-        }
-    }
-
-    private void drawLine() {
-        System.out.println("drawLine: " + this.toString());
-        // ...
-    }
-    private void drawRectangle() {
-        System.out.println("drawRectangle: " + this.toString());
-        // ...
-    }
-    private void drawOval() {
-        System.out.println("drawOval: " + this.toString());
-        // ...
-    }
+    public abstract void draw();
 }
