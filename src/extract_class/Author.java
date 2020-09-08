@@ -1,4 +1,4 @@
-package extractclass;
+package extract_class;
 
 class Author {
     private String name;

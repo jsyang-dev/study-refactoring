@@ -1,4 +1,4 @@
-package extractmethod;
+package extract_method;
 
 public class Banner {
     private final String content;

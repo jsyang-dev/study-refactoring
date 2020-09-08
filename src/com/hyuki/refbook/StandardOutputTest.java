@@ -8,22 +8,22 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 public class StandardOutputTest {
-    private PrintStream _savedOut;
-    private ByteArrayOutputStream _actual;
+    private PrintStream savedOut;
+    private ByteArrayOutputStream actual;
 
     @Before public void setUp() {
-        _savedOut = System.out;
-        _actual = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(new BufferedOutputStream(_actual)));
+        savedOut = System.out;
+        actual = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(new BufferedOutputStream(actual)));
     }
 
     @After public void tearDown() {
-        System.setOut(_savedOut);
+        System.setOut(savedOut);
     }
 
     protected String getActualOutput() {
         System.out.flush();
-        return _actual.toString();
+        return actual.toString();
     }
 
     protected String getExpectedOutput(String... strs) {

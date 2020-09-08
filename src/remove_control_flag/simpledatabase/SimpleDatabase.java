@@ -1,4 +1,4 @@
-package removecontrolflag.simpledatabase;
+package remove_control_flag.simpledatabase;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class SimpleDatabase {
     private final Map<String,String> map = new HashMap<>();
-    private static Pattern pattern = Pattern.compile("([^=]+)=(.*)");
+    private static final Pattern pattern = Pattern.compile("([^=]+)=(.*)");
     public SimpleDatabase(Reader r) throws IOException {
         BufferedReader reader = new BufferedReader(r);
         while (true) {

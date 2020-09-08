@@ -1,10 +1,10 @@
-package extractclass;
+package extract_class;
 
 public class Book {
-    private String title;
-    private String isbn;
-    private String price;
-    private Author author;
+    private final String title;
+    private final String isbn;
+    private final String price;
+    private final Author author;
 
     public Book(String title, String isbn, String price, String authorName, String authorMail) {
         this.title = title;

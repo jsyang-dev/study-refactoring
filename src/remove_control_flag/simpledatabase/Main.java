@@ -1,4 +1,4 @@
-package removecontrolflag.simpledatabase;
+package remove_control_flag.simpledatabase;
 
 import java.io.FileReader;
 import java.io.IOException;

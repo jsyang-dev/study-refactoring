@@ -1,4 +1,4 @@
-package removecontrolflag.findint;
+package remove_control_flag.findint;
 
 public class Main {
     public static void main(String[] args) {
