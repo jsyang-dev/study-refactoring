@@ -8,23 +8,28 @@ public class Command {
     public static final Command BACKWARD = new Command("backward");
     public static final Command TURN_RIGHT = new Command("right");
     public static final Command TURN_LEFT = new Command("left");
-    private static final Map<String,Command> _commandNameMap = new HashMap<String,Command>();
+    private static final Map<String, Command> _commandNameMap = new HashMap<>();
+
     static {
-        _commandNameMap.put(FORWARD._name, FORWARD);
-        _commandNameMap.put(BACKWARD._name, BACKWARD);
-        _commandNameMap.put(TURN_RIGHT._name, TURN_RIGHT);
-        _commandNameMap.put(TURN_LEFT._name, TURN_LEFT);
+        _commandNameMap.put(FORWARD.name, FORWARD);
+        _commandNameMap.put(BACKWARD.name, BACKWARD);
+        _commandNameMap.put(TURN_RIGHT.name, TURN_RIGHT);
+        _commandNameMap.put(TURN_LEFT.name, TURN_LEFT);
     }
-    private final String _name;
+
+    private final String name;
+
     private Command(String name) {
-        _name = name;
+        this.name = name;
     }
+
     public String getName() {
-        return _name;
+        return name;
     }
-    public static Command parseCommand(String name) {
+
+    public static Command parseCommand(String name) throws InvalidCommandException {
         if (!_commandNameMap.containsKey(name)) {
-            return null;
+            throw new InvalidCommandException(name);
         }
         return _commandNameMap.get(name);
     }

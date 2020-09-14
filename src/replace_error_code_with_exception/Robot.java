@@ -3,46 +3,48 @@ package replace_error_code_with_exception;
 import java.util.StringTokenizer;
 
 public class Robot {
-    private final String _name;
-    private final Position _position = new Position(0, 0);
-    private final Direction _direction = new Direction(0, 1);
+    private final String name;
+    private final Position position = new Position(0, 0);
+    private final Direction direction = new Direction(0, 1);
+
     public Robot(String name) {
-        _name = name;
+        this.name = name;
     }
+
     public void execute(String commandSequence) {
         StringTokenizer tokenizer = new StringTokenizer(commandSequence);
-        while (tokenizer.hasMoreTokens()) {
-            String token = tokenizer.nextToken();
-            if (!executeCommand(token)) {
-                System.out.println("Invalid command: " + token);
-                break;
+        try {
+            while (tokenizer.hasMoreTokens()) {
+                String token = tokenizer.nextToken();
+                executeCommand(token);
             }
+        } catch (InvalidCommandException e) {
+            System.out.println("Invalid command: " + e.toString());
         }
     }
-    public boolean executeCommand(String commandString) {
+
+    public void executeCommand(String commandString) throws InvalidCommandException {
         Command command = Command.parseCommand(commandString);
-        if (command == null) {
-            return false;
-        }
-        return executeCommand(command);
+        executeCommand(command);
     }
-    public boolean executeCommand(Command command) {
+
+    public void executeCommand(Command command) throws InvalidCommandException {
         if (command == Command.FORWARD) {
-            _position.relativeMove(_direction._x, _direction._y);
+            position.relativeMove(direction.x, direction.y);
         } else if (command == Command.BACKWARD) {
-            _position.relativeMove(-_direction._x, -_direction._y);
+            position.relativeMove(-direction.x, -direction.y);
         } else if (command == Command.TURN_RIGHT) {
-            _direction.setDirection(_direction._y, -_direction._x);
+            direction.setDirection(direction.y, -direction.x);
         } else if (command == Command.TURN_LEFT) {
-            _direction.setDirection(-_direction._y, _direction._x);
+            direction.setDirection(-direction.y, direction.x);
         } else {
-            return false;
+            throw new InvalidCommandException();
         }
-        return true;
     }
+
     public String toString() {
-        return "[ Robot: " + _name + " "
-            + "position(" + _position._x + ", " + _position._y + "), "
-            + "direction(" + _direction._x + ", " + _direction._y + ") ]";
+        return "[ Robot: " + name + " "
+                + "position(" + position._x + ", " + position._y + "), "
+                + "direction(" + direction.x + ", " + direction.y + ") ]";
     }
 }
