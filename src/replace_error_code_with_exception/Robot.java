@@ -25,26 +25,28 @@ public class Robot {
 
     public void executeCommand(String commandString) throws InvalidCommandException {
         Command command = Command.parseCommand(commandString);
-        executeCommand(command);
-    }
-
-    public void executeCommand(Command command) throws InvalidCommandException {
-        if (command == Command.FORWARD) {
-            position.relativeMove(direction.x, direction.y);
-        } else if (command == Command.BACKWARD) {
-            position.relativeMove(-direction.x, -direction.y);
-        } else if (command == Command.TURN_RIGHT) {
-            direction.setDirection(direction.y, -direction.x);
-        } else if (command == Command.TURN_LEFT) {
-            direction.setDirection(-direction.y, direction.x);
-        } else {
-            throw new InvalidCommandException();
-        }
+        command.execute(this);
     }
 
     public String toString() {
         return "[ Robot: " + name + " "
                 + "position(" + position._x + ", " + position._y + "), "
                 + "direction(" + direction.x + ", " + direction.y + ") ]";
+    }
+
+    public void forward() {
+        position.relativeMove(direction.x, direction.y);
+    }
+
+    public void backward() {
+        position.relativeMove(-direction.x, -direction.y);
+    }
+
+    public void right() {
+        direction.setDirection(direction.y, -direction.x);
+    }
+
+    public void left() {
+        direction.setDirection(-direction.y, direction.x);
     }
 }
