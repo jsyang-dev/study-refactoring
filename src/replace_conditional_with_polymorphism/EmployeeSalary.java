@@ -15,23 +15,22 @@ public class EmployeeSalary {
     }
 
     public int payAmount() {
-        return extractedPayAmount();
+        return employee.payAmount(this);
     }
 
-    private int extractedPayAmount() {
-        switch (getEmployee()) {
-            case Employee.ENGINEER:
-                return monthlySalary;
-            case Employee.SALESMAN:
-                return monthlySalary + commission;
-            case Employee.MANGER:
-                return monthlySalary + bonus;
-            default:
-                throw new RuntimeException("Incorrect employee");
-        }
-    }
-
-    private int getEmployee() {
+    public int getEmployee() {
         return employee.getTypeCode();
+    }
+
+    public int getMonthlySalary() {
+        return monthlySalary;
+    }
+
+    public int getCommission() {
+        return commission;
+    }
+
+    public int getBonus() {
+        return bonus;
     }
 }
