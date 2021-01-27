@@ -5,13 +5,13 @@ public class EmployeeSalary {
     private final int monthlySalary;
     private final int commission;
     private final int bonus;
-    private final Employee type;
+    private final Employee employee;
 
-    public EmployeeSalary(int monthlySalary, int commission, int bonus, Employee type) {
+    public EmployeeSalary(int monthlySalary, int commission, int bonus, Employee employee) {
         this.monthlySalary = monthlySalary;
         this.commission = commission;
         this.bonus = bonus;
-        this.type = type;
+        this.employee = employee;
     }
 
     public int payAmount() {
@@ -19,7 +19,7 @@ public class EmployeeSalary {
     }
 
     private int extractedPayAmount() {
-        switch (getType()) {
+        switch (getEmployee()) {
             case Employee.ENGINEER:
                 return monthlySalary;
             case Employee.SALESMAN:
@@ -31,7 +31,7 @@ public class EmployeeSalary {
         }
     }
 
-    private int getType() {
-        return type.getTypeCode();
+    private int getEmployee() {
+        return employee.getTypeCode();
     }
 }
