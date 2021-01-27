@@ -15,6 +15,10 @@ public class EmployeeSalary {
     }
 
     public int payAmount() {
+        return extractedPayAmount();
+    }
+
+    private int extractedPayAmount() {
         switch (getType()) {
             case Employee.ENGINEER:
                 return monthlySalary;
