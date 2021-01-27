@@ -9,15 +9,6 @@ public class Engineer extends Employee {
 
     @Override
     public int payAmount(EmployeeSalary employeeSalary) {
-        switch (employeeSalary.getEmployee()) {
-            case Employee.ENGINEER:
-                return employeeSalary.getMonthlySalary();
-            case Employee.SALESMAN:
-                return employeeSalary.getMonthlySalary() + employeeSalary.getCommission();
-            case Employee.MANGER:
-                return employeeSalary.getMonthlySalary() + employeeSalary.getBonus();
-            default:
-                throw new RuntimeException("Incorrect employee");
-        }
+        return employeeSalary.getMonthlySalary();
     }
 }
